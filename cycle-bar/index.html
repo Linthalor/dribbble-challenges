@@ -1,0 +1,241 @@
+<html>
+
+<head>
+  <style>
+    body {
+      height: 100%;
+      width: 100%;
+      font-family: Impact, Charcoal, sans-serif;
+      margin: 0;
+
+      background-color: #d7dceb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .app {
+      background-color: #f6f6f6;
+      width: 375px;
+      height: 812px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 32px;
+      border: 4px solid;
+    }
+
+    .background {
+      background-color: white;
+      overflow: visible;
+      height: 100%;
+      width: calc(100% - 96px);
+      position: absolute;
+    }
+
+    .top-corner {
+      background-color: #e93249;
+      border-bottom-right-radius: 96px;
+      /* padding: 256px; */
+      padding-left: 64px;
+      margin-right: 32px;
+      height: 225px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .title-container {
+      writing-mode: vertical-rl;
+      transform: scalex(-1.3) scaley(-0.9);
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      font-size: 80px;
+      /* font-family: Impact, Charcoal, sans-serif; */
+      margin-bottom: -8px;
+    }
+
+    .top-title,
+    .bottom-title {
+      position: absolute;
+    }
+
+    .top-title {
+      color: white;
+    }
+
+    .bottom-title {
+      bottom: 0;
+      white-space: pre;
+    }
+
+    .main-image {
+      position: absolute;
+      top: 67px;
+      right: 59px;
+      height: 56%;
+      width: 44%;
+    }
+
+    .tabs {
+      bottom: 0;
+      margin-right: 0;
+      position: absolute;
+      width: calc(100% - 32px);
+      height: 216px;
+      margin-left: 32px;
+      margin-bottom: 32px;
+    }
+
+    .tab-headers {
+      height: 56px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-right: 32px;
+    }
+
+    .tab-headers button {
+      font-size: 12px;
+      min-width: 96px;
+      background: none;
+      border: none;
+      height: 36px;
+      font-weight: bold;
+      color: #29292b;
+    }
+
+    .tab-headers button.active {
+      background: #ff0042;
+      border-radius: 36px;
+      color: white;
+      /* min-width: 94px; */
+      font-weight: normal;
+    }
+
+    .tab-headers button.active>span {
+      opacity: 0.8;
+    }
+
+    .tab-content {
+      background: #1e1e20;
+      height: calc(100% - 56px);
+      border-top-left-radius: 24px;
+      border-bottom-left-radius: 24px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .tab-content .class {
+      min-width: 88px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .tab-content .class .title {
+      color: #e7324b;
+      font-size: 48px;
+      transform: scalex(0.6);
+      width: 0;
+    }
+
+    .tab-content .class br.title-description-seperator {
+      line-height: 8px;
+    }
+
+    .tab-content .class .description {
+      color: white;
+      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    .tab-content .class br.description-time-seperator {
+      line-height: 8px;
+    }
+
+    .tab-content .class .time {
+      color: white;
+      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      font-size: 8px;
+      opacity: 0.7;
+    }
+
+    .tab-content hr {
+      height: 50%;
+      background: white;
+      opacity: 0.15;
+    }
+
+    .challenge-reference {
+      color: #161617;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="background">
+    </div>
+    <div class="top-corner">
+      <div class="title-container">
+        <span class="top-title">Bar</span>
+        <span class="bottom-title">Cycle </span>
+      </div>
+    </div>
+    <img src="./cycle.png" class="main-image">
+    <div class="tabs">
+      <div class="tab-headers">
+        <button class="active">
+          <span>CLASSES</span>
+        </button>
+        <button>RESERVED</button>
+        <button>SCHEDULE</button>
+      </div>
+      <div class="tab-content">
+        <div class="class">
+          <span class="title">C10</span>
+          <br class="title-description-seperator">
+          <span class="description">Recovery</span>
+          <br class="description-time-seperator">
+          <span class="time">10am</span>
+        </div>
+        <hr>
+        <div class="class">
+          <span class="title">C05</span>
+          <br class="title-description-seperator">
+          <span class="description">Cardio</span>
+          <br class="description-time-seperator">
+          <span class="time">10am</span>
+        </div>
+        <hr>
+        <div class="class">
+          <span class="title">C22</span>
+          <br class="title-description-seperator">
+          <span class="description">Challenge</span>
+          <br class="description-time-seperator">
+          <span class="time">10am</span>
+        </div>
+        <hr>
+        <div class="class">
+          <span class="title">C03</span>
+          <br class="title-description-seperator">
+          <span class="description">Intervals</span>
+          <br class="description-time-seperator">
+          <span class="time">10am</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="challenge-reference">
+    Challenge
+    <a
+      href="https://dribbble.com/shots/7050443-Cycle-Bar-App-Adobe-XD-Daily-Creative-Challenge-Livestream">reference</a>
+  </p>
+</body>
+
+</html>

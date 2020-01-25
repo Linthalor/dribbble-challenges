@@ -2,9 +2,16 @@
 
 <head>
   <style>
+    :root {
+      --width: 375px;
+      --height: 812px;
+    }
+
     body {
       height: 100%;
+      min-height: calc(var(--height) + 64px);
       width: 100%;
+      min-width: var(--width);
       font-family: Impact, Charcoal, sans-serif;
       margin: 0;
 
@@ -13,12 +20,20 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      overflow: auto;
     }
 
     .app {
       background-color: #f6f6f6;
-      width: 375px;
-      height: 812px;
+
+      width: var(--width);
+      min-width: var(--width);
+      max-width: var(--width);
+
+      height: var(--height);
+      min-height: var(--height);
+      max-height: var(--height);
+
       overflow: hidden;
       position: relative;
       border-radius: 32px;
@@ -233,8 +248,8 @@
   </div>
   <p class="challenge-reference">
     Challenge
-    <a
-      href="https://dribbble.com/shots/7050443-Cycle-Bar-App-Adobe-XD-Daily-Creative-Challenge-Livestream">reference</a>
+    <a href="https://dribbble.com/shots/7050443-Cycle-Bar-App-Adobe-XD-Daily-Creative-Challenge-Livestream"
+      target="_blank" rel="noopener noreferrer">reference</a>
   </p>
 </body>
 

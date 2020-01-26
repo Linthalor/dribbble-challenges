@@ -323,6 +323,33 @@
       font-size: 13px;
       font-weight: bold;
     }
+
+
+    .arc-positive {
+      position: absolute;
+      border: 2px solid #000;
+      border-radius: 50%;
+      height: 100px;
+      width: 100px;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      transform: rotate(300deg)
+    }
+
+    .arc-nevative {
+      position: absolute;
+      border: 2px solid #000;
+      border-radius: 50%;
+      height: 100px;
+      width: 100px;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      transform: rotate(300deg)
+    }
+
+    .chart {
+      position: absolute;
+    }
   </style>
 </head>
 
@@ -343,7 +370,11 @@
         <span class="amount">$12.864</span>
       </div>
       <div class="large-cirlce">
-
+        <!--
+          Needs either svg2 browser support or a library like d3 or the following:
+          https://medium.com/@cereallarceny/getting-gradients-to-follow-along-svg-paths-in-javascript-45357b60bed7
+        -->
+        <img class="chart" src="./pie-chart.png">
         <button class="small-circle">
           <i class="material-icons">more_horiz</i>
         </button>
@@ -423,7 +454,7 @@
             <span class="place">Grocery Store</span>
             <span class="time">24 Jan, 5:32PM</span>
           </div>
-          <span class="amount negative">-$166.77</span>
+          <span class="amount negative">- $166.77</span>
         </div>
         <div class="transaction">
           <div class="impact coffee">
@@ -436,7 +467,7 @@
             <span class="place">Coffee and Tea</span>
             <span class="time">23 Jan, 9:47AM</span>
           </div>
-          <span class="amount negative">-$6.99</span>
+          <span class="amount negative">- $6.99</span>
         </div>
       </div>
     </div>

@@ -1,0 +1,451 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <style>
+    :root {
+      --width: 375px;
+      --height: 812px;
+    }
+
+    body {
+      height: 100%;
+      min-height: calc(var(--height) + 64px);
+      width: 100%;
+      min-width: var(--width);
+      font-family: sans-serif;
+      margin: 0;
+
+      background-color: #fdedcb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: auto;
+    }
+
+    .app {
+      background: linear-gradient(60deg, #4b42b6 25%, #5057ca);
+
+      width: var(--width);
+      min-width: var(--width);
+      max-width: var(--width);
+
+      height: var(--height);
+      min-height: var(--height);
+      max-height: var(--height);
+
+      overflow: hidden;
+      position: relative;
+      border-radius: 32px;
+      border: 4px solid;
+    }
+
+    .bottom-sheet {
+      position: absolute;
+      bottom: 0;
+      height: 30%;
+      width: 100%;
+      border-top-right-radius: 32px;
+      border-top-left-radius: 32px;
+      background-color: #fbfcff;
+      box-sizing: border-box;
+      padding: 32px;
+      padding-top: 48px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .add {
+      border-radius: 32px;
+      width: 64px;
+      height: 64px;
+      position: absolute;
+      top: -32px;
+      left: calc(50% - 32px);
+      font-size: 48px;
+      line-height: 60px;
+      color: white;
+      background: linear-gradient(0deg, #fa779f, #fede42);
+      border: none;
+    }
+
+    .transactions-bar {
+      font-size: 21px;
+      font-weight: bold;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .transactions-bar> :first-child {
+      flex: 1 1 auto;
+    }
+
+    .transactions-bar>.fa {
+      font-size: 22px;
+      color: #c0c6d2;
+    }
+
+    /* .transactions-list {
+      margin-top: 20px;
+    } */
+
+    .transaction {
+      padding-top: 16px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .impact {
+      height: 56px;
+      width: 56px;
+      background: #e2e8f1;
+      border-radius: 28px;
+      margin-right: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .middle {
+      position: absolute;
+      top: 2px;
+      bottom: 2px;
+      left: 2px;
+      right: 2px;
+      border-radius: 50%;
+      background: #fbfcff;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+    }
+
+    .impact.food {
+      color: #fb9e7c;
+    }
+
+    .impact.coffee {
+      color: #4facfe;
+    }
+
+    /*
+     * Circle is divided into octants.
+     * Progress, in degrees, is binned to an octant that will need caculation.
+     * All octants that are completely contained by progress are filled
+     * with defined clip points as follows:
+     * start in middle: 50% 50%
+     * going clockwise up to needed octant: 50% 0, 100% 0, 100% 50%, 100% 100%, 50% 100%, 0 100%, 0 50%, 0 0, 50% 0 
+     *
+     * A given octant will havea given (x, or y) that the side of the square it belongs to.
+     * The remaining unkown is the intersection of that side with the vector from the origin to theta.
+     * This can be done using the following equations as per (https://arxiv.org/ftp/arxiv/papers/1509/1509.06344.pdf):
+     * y = sqrt((x/cos(theta))^2 - x^2) and x = sqrt((y/sin(theta))^2 - y^2).
+     */
+
+    .impact.food .progress {
+      background: #fb9e7c;
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 98% 100%);
+    }
+
+    .impact.coffee .progress {
+      background: #4facfe;
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 30%);
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+    }
+
+    .place {
+      font-size: 18px;
+      line-height: 36px;
+      font-weight: bold;
+      margin-top: -8px;
+    }
+
+    .time {
+      font-size: 12px;
+      font-weight: bold;
+      color: #9ea9bb;
+    }
+
+    .transaction .amount {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .transaction .amount.negative {
+      color: #ee7790;
+    }
+
+    .actions {
+      position: absolute;
+      width: 100%;
+      padding: 24px;
+      display: flex;
+      flex-direction: row;
+      box-sizing: border-box;
+    }
+
+    .actions .back {
+      height: 60px;
+      width: 46px;
+      border-radius: 20px;
+      border: none;
+      background: #3f38b3c7;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+    }
+
+    .actions .spacer {
+      flex: 1 1 auto;
+    }
+
+    .actions .options {
+      background: none;
+      border: none;
+      font-size: 30px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .actions .fa {
+      color: white;
+      font-size: 18px;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 52px;
+    }
+
+    .balance {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .balance .title {
+      color: #8079e1;
+      font-size: 17px;
+      line-height: 30px;
+    }
+
+    .balance .amount {
+      color: white;
+      font-size: 30px;
+      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      line-height: 44px;
+      font-weight: bold;
+    }
+
+    .large-cirlce {
+      margin: 24px;
+      height: 234px;
+      width: 234px;
+      border-radius: 50%;
+      box-shadow: -8px -8px 13px 0px #5c51d1, inset 3px 3px 4px 0px #5c51d1, 12px 12px 20px 0px #3e359e, inset -2px -2px 6px 0px #3f36ab;
+      background: linear-gradient(135deg, #564dc0, #3f36ab);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .small-circle {
+      border: none;
+      height: 64px;
+      width: 64px;
+      border-radius: 50%;
+      box-shadow: -8px -8px 13px 0px #5c51d1, 12px 12px 20px 0px #3e359e;
+      background: linear-gradient(135deg, #564dc0, #3f36ab);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+    }
+
+    .small-circle .material-icons {
+      font-size: 35px;
+      margin-top: 4px;
+    }
+
+    .history {
+      display: flex;
+      flex-direction: row;
+      margin-left: 58px;
+    }
+
+    .history .month {
+      display: flex;
+      flex-direction: column;
+      padding: 7px;
+      align-items: center;
+    }
+
+    .history .month .bar {
+      background: #3930a2;
+      height: 80px;
+      width: 16px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      flex-direction: column-reverse;
+      display: flex;
+    }
+
+    .history .month .bar .value {
+      border-radius: 8px;
+    }
+
+    .history .month .bar .value.positive {
+      background: linear-gradient(0deg, #4bb1fe, #04effe, #9afeff);
+    }
+
+    .history .month .bar .value.negative {
+      background: linear-gradient(0deg, #f26f99, #f9d847);
+    }
+
+    .history .month .title {
+      color: #8178e0;
+      font-size: 13px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="actions">
+      <button class="back">
+        <i class="fa fa-chevron-left"></i>
+      </button>
+      <div class="spacer"></div>
+      <button class="options">
+        :
+      </button>
+    </div>
+    <div class="main-content">
+      <div class="balance">
+        <span class="title">Balance</span>
+        <span class="amount">$12.864</span>
+      </div>
+      <div class="large-cirlce">
+
+        <button class="small-circle">
+          <i class="material-icons">more_horiz</i>
+        </button>
+      </div>
+      <div class="history">
+        <div class="month">
+          <div class="bar">
+            <div class="value positive" style="height: 40%"></div>
+          </div>
+          <span class="title">Jan</span>
+        </div>
+        <div class="month">
+          <div class="bar">
+            <div class="value positive" style="height: 84%"></div>
+          </div>
+          <span class="title">Feb</span>
+        </div>
+        <div class="month">
+          <div class="bar">
+            <div class="value negative" style="height: 30%"></div>
+          </div>
+          <span class="title">Mar</span>
+        </div>
+        <div class="month">
+          <div class="bar">
+            <div class="value positive" style="height: 65%"></div>
+          </div>
+          <span class="title">Apr</span class="title">
+        </div>
+        <div class="month">
+          <div class="bar">
+            <div class="value positive" style="height: 50%"></div>
+          </div>
+          <span class="title">May</span class="title">
+        </div>
+        <div class="month">
+          <div class="bar">
+            <div class="value positive" style="height: 88%"></div>
+          </div>
+          <span class="title">July</span class="title">
+        </div>
+        <div class="month">
+          <div class="bar">
+            <div class="value positive" style="height: 75%"></div>
+          </div>
+          <span class="title">June</span class="title">
+        </div>
+        <div class="month">
+          <div class="bar">
+            <div class="value positive" style="height: 30%"></div>
+          </div>
+          <span class="title">Aug</span class="title">
+        </div>
+        <div class="month">
+          <div class="bar">
+            <div class="value positive" style="height: 60%"></div>
+          </div>
+          <span class="title">Sep</span>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-sheet">
+      <button class="add">+</button>
+      <div class="transactions-bar">
+        <span>Transactions</span>
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="transactions-list">
+        <div class="transaction">
+          <div class="impact food">
+            <div class="progress"></div>
+            <div class="middle">
+              <i class="fa fa-utensils"></i>
+            </div>
+          </div>
+          <div class="details">
+            <span class="place">Grocery Store</span>
+            <span class="time">24 Jan, 5:32PM</span>
+          </div>
+          <span class="amount negative">-$166.77</span>
+        </div>
+        <div class="transaction">
+          <div class="impact coffee">
+            <div class="progress"></div>
+            <div class="middle">
+              <i class="fa fa-coffee"></i>
+            </div>
+          </div>
+          <div class="details">
+            <span class="place">Coffee and Tea</span>
+            <span class="time">23 Jan, 9:47AM</span>
+          </div>
+          <span class="amount negative">-$6.99</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="challenge-reference">
+    Challenge
+    <a href="SOME_LINK_TO_DRIBBBLE_ETC" target="_blank" rel="noopener noreferrer">reference</a>
+  </p>
+</body>
+
+</html>

@@ -1,0 +1,265 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <style>
+    :root {
+      --width: 375px;
+      --height: 812px;
+    }
+
+    body {
+      height: 100%;
+      min-height: calc(var(--height) + 64px);
+      width: 100%;
+      min-width: var(--width);
+      font-family: sans-serif;
+      margin: 0;
+
+      background: #eceff4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: auto;
+    }
+
+    .app {
+      background-color: #e9eaef;
+
+      width: var(--width);
+      min-width: var(--width);
+      max-width: var(--width);
+
+      height: var(--height);
+      min-height: var(--height);
+      max-height: var(--height);
+
+      overflow: hidden;
+      position: relative;
+      border-radius: 32px;
+      box-shadow: 30px 30px 38px #b8bcca, 20px 20px 12px rgba(184, 188, 202, 0.3), -30px -30px 38px rgba(255, 255, 255, 0.7), -20px -20px 12px rgba(255, 255, 255, 0.3);
+      padding: 16px;
+      padding-top: 48px;
+      padding-bottom: 10px;
+      box-sizing: border-box;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    button {
+      border: none;
+      background: none;
+      border-radius: 8px;
+      height: 48px;
+      width: 48px;
+      font-size: 20px;
+      color: #8b94a6;
+      font-weight: bold;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .spacer {
+      flex: 1 1 auto;
+    }
+
+    .title {
+      margin-top: 42px;
+      color: #2a2f39;
+      font-size: 30px;
+    }
+
+    .notification-list {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+    }
+
+    .notification {
+      border-radius: 16px;
+      height: 120px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      box-sizing: border-box;
+      padding: 16px;
+    }
+
+    .swipping {
+      margin-left: -50%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .swipping>.notification {
+      width: 100%;
+    }
+
+    .swipping button {
+      height: 64px;
+      min-height: 64px;
+      width: 64px;
+      min-width: 64px;
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      margin-left: 16px;
+    }
+
+    .swipping button.positive {
+      background: linear-gradient(135deg, #13b91f, #12a111);
+    }
+
+    .swipping button.negative {
+      background: linear-gradient(135deg, #ee5c5c, #e33535);
+    }
+
+    .from {
+      border-radius: 50%;
+      height: 48px;
+      width: 48px;
+      min-width: 48px;
+      max-width: 48px;
+      margin-right: 20px;
+      background: lightgrey;
+    }
+
+    .description {
+      flex-direction: column;
+      display: flex;
+      flex: 1 1 auto;
+    }
+
+    .summary {
+      font-size: 14px;
+      padding-bottom: 8px;
+      line-height: 20px;
+    }
+
+    .summary>.blue {
+      font-weight: bold;
+      color: #418fbd;
+    }
+
+    .time {
+      font-size: 13px;
+      color: #9fa5b4;
+    }
+
+    button,
+    .notification {
+      box-shadow: 9px 9px 12px #b8bcca, 6px 6px 3px rgba(184, 188, 202, 0.3), -9px -9px 12px rgba(255, 255, 255, 0.2), -6px -6px 3px rgba(255, 255, 255, 0.2);
+    }
+
+    .icon {
+      margin-left: 16px;
+      font-size: 36px;
+      margin-top: -16px;
+      width: 36px;
+      max-width: 36px;
+      min-width: 36px;
+    }
+
+    .icon.like {
+      color: #e74c88;
+    }
+
+    .icon.check {
+      color: #3b8abb;
+      font-weight: bold;
+    }
+
+    .icon.other {
+      color: #8992a5;
+    }
+
+    .more {
+      color: #ea5591;
+      margin: auto;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="actions">
+      <button><i class="fa fa-chevron-left"></i></button>
+      <div class="spacer"></div>
+      <button class="material-icons">filter_list</button>
+    </div>
+    <h1 class="title">Notifications</h1>
+    <div class="notification-list">
+      <div class="notification">
+        <img class="from" src="https://www.placecage.com/48/48">
+        <div class="description">
+          <span class="summary">
+            <span class="blue">Anna Spancer</span>
+            <span>liked your shot</span>
+          </span>
+          <span class="time">2 days ago</span>
+        </div>
+        <span class="icon like material-icons">favorite</span>
+      </div>
+      <div class="notification">
+        <img class="from" src="https://www.fillmurray.com//48/48">
+        <div class="description">
+          <span class="summary">
+            <span class="blue">Tom Johnson</span>
+            <span>followed you</span>
+          </span>
+          <span class="time">5 days ago</span>
+        </div>
+        <span class="icon check material-icons">check</span>
+      </div>
+      <div class="swipping">
+        <div class="notification">
+          <img class="from" src="https://www.placecage.com/48/48">
+          <div class="description">
+            <span class="summary">
+              <span class="blue">Anna</span>
+              <span>commented on</span>
+              <span class="blue">SB Shot</span>
+            </span>
+
+            <span class="time">5 days ago</span>
+          </div>
+          <span class="icon other material-icons">chat</span>
+        </div>
+        <button class="positive material-icons">check</button>
+        <button class="negative material-icons">close</button>
+      </div>
+      <div class="notification">
+        <img class="from" src="https://www.stevensegallery.com/48/48">
+        <div class="description">
+          <span class="summary">
+            <span class="blue">Mike Joe</span>
+            <span>added</span>
+            <span class="blue">Dribbble Shot</span>
+            <span>to the</span>
+            <span class="blue">payment</span>
+            <span>bucket.</span>
+          </span>
+          <span class="time">about 1 month ago</span>
+        </div>
+        <span class="icon other material-icons">payment</span>
+      </div>
+      <span class="more">See all incoming activity</span>
+    </div>
+  </div>
+  <p class="challenge-reference">
+    Challenge
+    <a href="https://dribbble.com/shots/9780520-Hello-Dribbble" target="_blank" rel="noopener noreferrer">reference</a>
+  </p>
+</body>
+
+</html>
